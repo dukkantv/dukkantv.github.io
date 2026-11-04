@@ -1,2 +1,3 @@
-# dukkantv.github.io
-Dükkan TV web sitesi
+# Dükkan TV
+
+Esnafa özel kısa reklam videoları — Bursa. Site: https://dukkantv.github.io
