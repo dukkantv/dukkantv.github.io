@@ -154,6 +154,15 @@ footer a { font-weight: 700; color: var(--ink); }
         <label class="f" for="kampanya"><span>Kampanya <span class="hint">(varsa)</span></span>
           <input type="text" id="kampanya" placeholder="Örn. İlk kesimde %20 indirim"></label>
         <div>
+          <div class="group-label">Videoda siz nasıl yer alın?</div>
+          <div class="chips" id="gorunum">
+            <label class="chip"><input type="radio" name="gorunum" value="Çizgi film hâlim olsun (fotoğrafımdan çizilsin)" checked><span>🎨 Çizgi film hâlim</span></label>
+            <label class="chip"><input type="radio" name="gorunum" value="Gerçek fotoğrafım görünsün"><span>📷 Gerçek fotoğrafım</span></label>
+            <label class="chip"><input type="radio" name="gorunum" value="Videoda görünmek istemiyorum"><span>🙈 Görünmeyeyim</span></label>
+          </div>
+          <p class="hint" style="margin:6px 0 0">Çizgi film hâli: fotoğrafınızdan size benzeyen bir karakter çizilir, hikâyede o konuşur. Gerçek fotoğraf: videoda kendi fotoğrafınız yer alır.</p>
+        </div>
+        <div>
           <div class="group-label">Müşterileriniz daha çok kimler?</div>
           <div class="chips" id="hedef">
             <label class="chip"><input type="checkbox" value="Gençler"><span>Gençler</span></label>
@@ -193,7 +202,7 @@ footer a { font-weight: 700; color: var(--ink); }
       <div class="step-head"><div class="num">5</div><h2 id="h4s">Onay ve gönderim</h2></div>
       <div class="fields">
         <label class="check" for="izin"><input type="checkbox" id="izin">
-          <span><b>Görüntülerde yüzü görünen herkesin izni var</b><small>Premium'da fotoğrafınızdan çizgi film karakteriniz çizilir; buna da izin vermiş olursunuz.</small></span></label>
+          <span><b>Görüntülerde yüzü görünen herkesin izni var</b><small>Seçiminize göre fotoğrafınız videoda gerçek hâliyle ya da çizgi film karakterine dönüştürülerek kullanılır; buna izin vermiş olursunuz.</small></span></label>
         <label class="check" for="dogru"><input type="checkbox" id="dogru">
           <span><b>Bilgiler doğru, videoda kullanılabilir</b><small>Adres, telefon ve kampanya bilgisi videoda yazılacak. Video Dükkan TV hesaplarında da yayınlanır.</small></span></label>
         <div>
@@ -224,7 +233,7 @@ const SHOTS = {
     ["on", "Dükkânın önü", "Tabela görünecek şekilde 2–3 fotoğraf"],
     ["ic", "İçerisi", "Temiz ve düzenli hâliyle 3–4 fotoğraf"],
     ["logo", "Logonuz", "Varsa"],
-    ["sahip", "Sizin bir fotoğrafınız", "Premium'da çizgi film karakteriniz bundan çizilir (isteğe bağlı)"]
+    ["sahip", "Sizin bir fotoğrafınız", "Yüzünüz net görünsün; çizgi film hâliniz ya da gerçek fotoğrafınız için (görünmek istemiyorsanız gerekmez)"]
   ],
   kuafor: [["is", "İş başında", "Saç kesimi, sakal tıraşı, öncesi–sonrası"]],
   kafe: [["is", "Ürünler", "Kahve, pasta, fırından çıkan ürünler"]],
@@ -259,6 +268,7 @@ function buildMessage() {
   const paket = (document.querySelector('#paket input:checked') || {}).value || "";
   const hedef = [...document.querySelectorAll("#hedef input:checked")].map(i => i.value);
   const ton = (document.querySelector("#ton input:checked") || {}).value || "";
+  const gorunum = (document.querySelector("#gorunum input:checked") || {}).value || "";
   const shots = [...document.querySelectorAll("#shots input:checked")].map(i => i.value);
   const L = ["🎬 DÜKKAN TV – VİDEO BİLGİ FORMU", "", "📦 Paket: " + paket, "",
     "🏪 Dükkân: " + (val("ad") || "—"),
@@ -271,6 +281,7 @@ function buildMessage() {
   if (val("kampanya")) L.push("🎁 Kampanya: " + val("kampanya"));
   if (hedef.length) L.push("👥 Müşteriler: " + hedef.join(", "));
   if (ton) L.push("🎭 Hava: " + ton);
+  if (gorunum) L.push("🧑 Videoda görünüm: " + gorunum);
   L.push("", "📸 Gönderilecek görüntüler: " + (shots.length ? shots.join(", ") : "henüz seçilmedi"));
   L.push("✅ İzinler: " + ($("izin").checked ? "Var" : "Belirtilmedi"));
   L.push("✅ Bilgiler doğru: " + ($("dogru").checked ? "Evet" : "Belirtilmedi"));
@@ -283,6 +294,7 @@ function snapshot() {
   s.paket = (document.querySelector('#paket input:checked') || {}).value;
   s.hedef = [...document.querySelectorAll("#hedef input:checked")].map(i => i.value);
   s.ton = (document.querySelector("#ton input:checked") || {}).value;
+  s.gorunum = (document.querySelector("#gorunum input:checked") || {}).value;
   s.shots = [...document.querySelectorAll("#shots input:checked")].map(i => i.value);
   s.izin = $("izin").checked; s.dogru = $("dogru").checked;
   return s;
@@ -304,6 +316,7 @@ function restore() {
   document.querySelectorAll("#paket input").forEach(i => { if (s.paket) i.checked = i.value === s.paket; });
   document.querySelectorAll("#hedef input").forEach(i => i.checked = (s.hedef || []).includes(i.value));
   document.querySelectorAll("#ton input").forEach(i => { if (s.ton) i.checked = i.value === s.ton; });
+  document.querySelectorAll("#gorunum input").forEach(i => { if (s.gorunum) i.checked = i.value === s.gorunum; });
   document.querySelectorAll("#shots input").forEach(i => i.checked = (s.shots || []).includes(i.value));
   $("izin").checked = !!s.izin; $("dogru").checked = !!s.dogru;
 }
