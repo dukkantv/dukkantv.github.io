@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="logo.png">
+<title>Bilgi Formu · Dükkan TV</title>
+<meta name="description" content="Dükkan TV reklam videosu bilgi formu: 3 dakikada doldurun, WhatsApp'tan gönderin.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: one narrow column like a printed order slip — awning on top, five numbered steps (a real sequence), sticky send bar */
+:root {
+  --bg: #fff8eb; --paper: #ffffff; --ink: #221e28; --muted: #6b6258; --line: #eadfca;
+  --mustard: #ffc43d; --red: #d63031; --red-ink: #ffffff; --chip: #fbefd3; --ok: #1f8a4c;
+  --wa: #1f8f4e; --wa-ink: #ffffff;
+  --display: "Poppins", "Segoe UI", system-ui, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1b1814; --paper: #25211c; --ink: #f6eedf; --muted: #b5a995; --line: #3a342c;
+    --mustard: #f2b730; --red: #ef5350; --red-ink: #1b1814; --chip: #332c22; --ok: #5cc98a; --wa: #3fbf73; --wa-ink: #10170f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1b1814; --paper: #25211c; --ink: #f6eedf; --muted: #b5a995; --line: #3a342c;
+  --mustard: #f2b730; --red: #ef5350; --red-ink: #1b1814; --chip: #332c22; --ok: #5cc98a; --wa: #3fbf73; --wa-ink: #10170f;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.5; }
+.wrap { max-width: 560px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 130px; }
+.awning { height: 34px; background: repeating-linear-gradient(90deg, #d63031 0 40px, #fff8eb 40px 80px); -webkit-mask: radial-gradient(20px at 20px 14px, #000 98%, transparent) 0 0/40px 34px repeat-x, linear-gradient(#000 0 0) 0 0/100% 14px no-repeat; mask: radial-gradient(20px at 20px 14px, #000 98%, transparent) 0 0/40px 34px repeat-x, linear-gradient(#000 0 0) 0 0/100% 14px no-repeat; }
+header { padding-block: 18px 8px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font-family: var(--display); font-weight: 800; font-size: 15px; text-decoration: none; color: inherit; }
+.brand img { width: 28px; height: 28px; border-radius: 6px; }
+.brand .tv { background: var(--red); color: #fff; border-radius: 6px; padding: 1px 7px; font-size: 13px; }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(26px, 6.5vw, 34px); line-height: 1.15; margin: 14px 0 8px; text-wrap: balance; }
+.lead { color: var(--muted); margin: 0; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.meta span { background: var(--chip); border-radius: 999px; padding: 4px 12px; font-size: 14px; font-weight: 600; }
+section.step { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; padding: 20px 18px; margin-top: 18px; }
+.step-head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.num { flex: none; width: 34px; height: 34px; border-radius: 50%; background: var(--mustard); color: #221e28; display: grid; place-items: center; font-family: var(--display); font-weight: 800; }
+h2 { font-family: var(--display); font-weight: 600; font-size: 19px; margin: 0; }
+.fields { display: grid; gap: 14px; }
+label.f { display: grid; gap: 5px; font-weight: 600; font-size: 15px; }
+.req { color: var(--red); }
+.hint { font-weight: 400; color: var(--muted); font-size: 14px; }
+input[type=text], input[type=tel], select, textarea { width: 100%; font: inherit; font-size: 17px; color: var(--ink); background: var(--bg); border: 1.5px solid var(--line); border-radius: 10px; padding: 11px 12px; }
+textarea { min-height: 92px; resize: vertical; }
+input:focus, select:focus, textarea:focus, .chip input:focus-visible + span, .check input:focus-visible, .pk input:focus-visible + span { outline: 3px solid var(--mustard); outline-offset: 1px; border-color: var(--mustard); }
+input.bad, textarea.bad { border-color: var(--red); }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.chip span { display: inline-block; border: 1.5px solid var(--line); border-radius: 999px; padding: 7px 14px; font-weight: 600; font-size: 15px; background: var(--bg); }
+.chip input:checked + span { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.group-label { font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+/* package picker */
+.pks { display: grid; gap: 10px; }
+.pk { position: relative; display: block; }
+.pk input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.pk span { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--bg); }
+.pk b { font-weight: 700; }
+.pk em { font-style: normal; font-family: var(--display); font-weight: 800; text-align: right; }
+.pk small { color: var(--muted); font-size: 14px; grid-column: 1 / -1; }
+.pk input:checked + span { border: 2px solid var(--red); background: var(--paper); }
+.pk-group { font-weight: 700; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 6px 0 -2px; }
+.promo { background: var(--chip); border-radius: 10px; padding: 10px 12px; font-size: 15px; margin-top: 12px; }
+.shots { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.check { display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: start; padding: 10px 12px; border-radius: 10px; background: var(--bg); border: 1px solid var(--line); cursor: pointer; }
+.check input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--red); }
+.check b { display: block; }
+.check small { color: var(--muted); font-size: 14px; }
+.rules { margin: 16px 0 0; padding: 14px 16px; border-radius: 10px; background: var(--chip); display: grid; gap: 6px; font-size: 15px; }
+.rules strong { font-family: var(--display); font-weight: 600; font-size: 14px; letter-spacing: .04em; text-transform: uppercase; }
+.rules ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
+.preview { white-space: pre-wrap; font-family: var(--body); font-size: 15px; background: var(--bg); border: 1px dashed var(--line); border-radius: 10px; padding: 12px; margin: 0; max-height: 260px; overflow: auto; }
+.err { color: var(--red); font-weight: 600; font-size: 15px; margin: 10px 0 0; }
+.sendbar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--paper); border-top: 1px solid var(--line); padding-top: 12px; padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.sendbar .in { max-width: 560px; margin: 0 auto; display: flex; gap: 10px; align-items: center; }
+.btn { font: inherit; font-weight: 700; font-size: 16px; border-radius: 12px; padding: 13px 16px; border: 0; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.btn.wa { flex: 1; background: var(--wa); color: var(--wa-ink); }
+.btn.copy { background: var(--chip); color: var(--ink); }
+.btn:focus-visible { outline: 3px solid var(--mustard); outline-offset: 2px; }
+.toast { font-size: 14px; color: var(--ok); font-weight: 600; min-height: 1.2em; margin: 8px 0 0; }
+footer { margin-top: 26px; color: var(--muted); font-size: 14px; text-align: center; }
+footer a { font-weight: 700; color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="awning" aria-hidden="true"></div>
+<div class="wrap">
+  <header>
+    <a class="brand" href="index.html"><img src="logo.png" alt="">Dükkan <span class="tv">TV</span></a>
+    <h1>Reklam videonuz için bilgi formu</h1>
+    <p class="lead">Dükkânınıza özel videoyu hazırlayabilmemiz için birkaç bilgiye ihtiyacımız var. Doldurduktan sonra tek dokunuşla WhatsApp'tan gönderiyorsunuz.</p>
+    <div class="meta"><span>⏱ 3 dakika</span><span>📱 Telefondan doldurulur</span><span>📸 Fotoğraflar WhatsApp'tan</span></div>
+  </header>
+
+  <form id="form" novalidate>
+    <section class="step" aria-labelledby="h0s">
+      <div class="step-head"><div class="num">1</div><h2 id="h0s">Paket seçin</h2></div>
+      <div class="pks" id="paket">
+        <div class="pk-group">Ekonomik · kısa reklam</div>
+        <label class="pk"><input type="radio" name="paket" value="Ekonomik · Tek video (750 ₺)" checked><span><b>Tek video</b><em>750 ₺</em><small>15–30 sn reklam, seslendirme, müzik</small></span></label>
+        <label class="pk"><input type="radio" name="paket" value="Ekonomik · Aylık 4 video (2.600 ₺)"><span><b>Aylık 4 video</b><em>2.600 ₺</em><small>Her hafta yeni bir video</small></span></label>
+        <label class="pk"><input type="radio" name="paket" value="Ekonomik · Aylık 8 video (4.800 ₺)"><span><b>Aylık 8 video</b><em>4.800 ₺</em><small>Haftada 2 yeni video</small></span></label>
+        <div class="pk-group">Premium · çizgi film bölümü</div>
+        <label class="pk"><input type="radio" name="paket" value="Premium · Tek bölüm (1.500 ₺)"><span><b>Tek bölüm</b><em>1.500 ₺</em><small>1,5–2 dk, konuşan karakterler · %50 kapora</small></span></label>
+        <label class="pk"><input type="radio" name="paket" value="Premium · Aylık 4 bölüm (5.400 ₺)"><span><b>Aylık 4 bölüm</b><em>5.400 ₺</em><small>Her hafta yeni bir macera · %50 kapora</small></span></label>
+        <label class="pk"><input type="radio" name="paket" value="Henüz karar vermedim, bilgi almak istiyorum"><span><b>Karar vermedim</b><em>—</em><small>Önce konuşalım</small></span></label>
+      </div>
+      <p class="promo">🎉 Açılışa özel: ilk ay tüm paketlerde <b>%20 indirim</b>.</p>
+    </section>
+
+    <section class="step" aria-labelledby="h1s">
+      <div class="step-head"><div class="num">2</div><h2 id="h1s">İşletme bilgileri</h2></div>
+      <div class="fields">
+        <label class="f" for="ad"><span>Dükkân adı <span class="req">*</span></span>
+          <input type="text" id="ad" placeholder="Örn. Yıldız Kuaför" autocomplete="organization" required></label>
+        <label class="f" for="sektor"><span>Sektör</span>
+          <select id="sektor">
+            <option value="kuafor">Kuaför / Berber</option>
+            <option value="kafe">Kafe / Pastane / Fırın</option>
+            <option value="manav">Manav / Bakkal / Market</option>
+            <option value="oto">Oto yıkama / Tamir</option>
+            <option value="restoran">Restoran / Lokanta</option>
+            <option value="toptan">Toptancı / Depo</option>
+            <option value="diger">Diğer</option>
+          </select></label>
+        <label class="f" for="yetkili"><span>Adınız <span class="hint">(Premium'da hikâyede bu adla anılırsınız, örn. “Erkan Abi”)</span></span>
+          <input type="text" id="yetkili" placeholder="Örn. Ahmet Bey" autocomplete="name"></label>
+        <label class="f" for="adres"><span>Adres veya semt <span class="req">*</span></span>
+          <input type="text" id="adres" placeholder="Örn. Yıldırım, Millet Mah. Şüheda Cd." required></label>
+        <label class="f" for="tel"><span>Telefon / WhatsApp <span class="req">*</span></span>
+          <input type="tel" id="tel" placeholder="05xx xxx xx xx" autocomplete="tel" required></label>
+        <label class="f" for="saat"><span>Çalışma saatleri</span>
+          <input type="text" id="saat" placeholder="Örn. Pzt–Cmt 09:00–21:00"></label>
+        <label class="f" for="insta"><span>Instagram hesabınız <span class="hint">(varsa)</span></span>
+          <input type="text" id="insta" placeholder="@kullaniciadi"></label>
+      </div>
+    </section>
+
+    <section class="step" aria-labelledby="h2s">
+      <div class="step-head"><div class="num">3</div><h2 id="h2s">Videoda ne anlatalım?</h2></div>
+      <div class="fields">
+        <label class="f" for="one"><span>Öne çıkarmak istediğiniz şey <span class="req">*</span></span>
+          <span class="hint">En çok satan ürün, en sevilen hizmet, sizi farklı kılan şey</span>
+          <textarea id="one" placeholder="Örn. Çocuk tıraşında çok sabırlıyız, aileler bizi seviyor." required></textarea></label>
+        <label class="f" for="kampanya"><span>Kampanya <span class="hint">(varsa)</span></span>
+          <input type="text" id="kampanya" placeholder="Örn. İlk kesimde %20 indirim"></label>
+        <div>
+          <div class="group-label">Müşterileriniz daha çok kimler?</div>
+          <div class="chips" id="hedef">
+            <label class="chip"><input type="checkbox" value="Gençler"><span>Gençler</span></label>
+            <label class="chip"><input type="checkbox" value="Aileler"><span>Aileler</span></label>
+            <label class="chip"><input type="checkbox" value="Çocuklu aileler"><span>Çocuklu aileler</span></label>
+            <label class="chip"><input type="checkbox" value="Esnaf / işletmeler"><span>Esnaf / işletmeler</span></label>
+            <label class="chip"><input type="checkbox" value="Herkes"><span>Herkes</span></label>
+          </div>
+        </div>
+        <div>
+          <div class="group-label">Videonun havası nasıl olsun?</div>
+          <div class="chips" id="ton">
+            <label class="chip"><input type="radio" name="ton" value="Samimi ve eğlenceli" checked><span>Samimi, eğlenceli</span></label>
+            <label class="chip"><input type="radio" name="ton" value="Ciddi ve kaliteli"><span>Ciddi, kaliteli</span></label>
+            <label class="chip"><input type="radio" name="ton" value="Hızlı, kampanya odaklı"><span>Hızlı, kampanya odaklı</span></label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="step" aria-labelledby="h3s">
+      <div class="step-head"><div class="num">4</div><h2 id="h3s">Gönderebileceğiniz görüntüler</h2></div>
+      <p class="hint" style="margin:0 0 12px">İşaretledikleriniz mesaja eklenir. Görüntüleri aynı WhatsApp sohbetine ayrıca yollayın.</p>
+      <ul class="shots" id="shots"></ul>
+      <div class="rules">
+        <strong>İyi fotoğraf için 4 kural</strong>
+        <ol>
+          <li>Telefonu <b>dik</b> tutun.</li>
+          <li><b>Gün ışığında</b> çekin, ışığı arkanıza almayın.</li>
+          <li>Çekmeden önce kamera merceğini <b>silin</b>.</li>
+          <li>Tabela, ürünler ve dükkân içi <b>ayrı ayrı</b> görünsün.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="step" aria-labelledby="h4s">
+      <div class="step-head"><div class="num">5</div><h2 id="h4s">Onay ve gönderim</h2></div>
+      <div class="fields">
+        <label class="check" for="izin"><input type="checkbox" id="izin">
+          <span><b>Görüntülerde yüzü görünen herkesin izni var</b><small>Premium'da fotoğrafınızdan çizgi film karakteriniz çizilir; buna da izin vermiş olursunuz.</small></span></label>
+        <label class="check" for="dogru"><input type="checkbox" id="dogru">
+          <span><b>Bilgiler doğru, videoda kullanılabilir</b><small>Adres, telefon ve kampanya bilgisi videoda yazılacak. Video Dükkan TV hesaplarında da yayınlanır.</small></span></label>
+        <div>
+          <div class="group-label">Gönderilecek mesaj</div>
+          <pre class="preview" id="preview"></pre>
+        </div>
+      </div>
+      <p class="err" id="err" hidden></p>
+    </section>
+  </form>
+
+  <footer>Sorunuz mu var? <a href="tel:+905356541841">0535 654 18 41</a> · dukkan.tvstudio@gmail.com<br>Dükkan TV · Bursa</footer>
+</div>
+
+<div class="sendbar">
+  <div class="in">
+    <a class="btn wa" id="wa" href="https://wa.me/905356541841" target="_blank" rel="noopener">WhatsApp'ta gönder</a>
+    <button class="btn copy" id="copy" type="button">Kopyala</button>
+  </div>
+  <div class="in"><p class="toast" id="toast" role="status"></p></div>
+</div>
+
+<script>
+const WA_NUMBER = "905356541841";
+
+const SHOTS = {
+  ortak: [
+    ["on", "Dükkânın önü", "Tabela görünecek şekilde 2–3 fotoğraf"],
+    ["ic", "İçerisi", "Temiz ve düzenli hâliyle 3–4 fotoğraf"],
+    ["logo", "Logonuz", "Varsa"],
+    ["sahip", "Sizin bir fotoğrafınız", "Premium'da çizgi film karakteriniz bundan çizilir (isteğe bağlı)"]
+  ],
+  kuafor: [["is", "İş başında", "Saç kesimi, sakal tıraşı, öncesi–sonrası"]],
+  kafe: [["is", "Ürünler", "Kahve, pasta, fırından çıkan ürünler"]],
+  manav: [["is", "Tezgâh ve ürünler", "Taze meyve-sebzenin yakın çekimi, raflar"]],
+  oto: [["is", "İş başında", "Köpüklü yıkama, öncesi–sonrası parlaklık"]],
+  restoran: [["is", "Yemekler", "En sevilen yemekler, servis anı"]],
+  toptan: [["is", "Depo ve ürünler", "Raflar, koliler, en çok satan ürünler"]],
+  diger: [["is", "İş başında / ürünler", "Ne yaptığınızı gösteren fotoğraflar"]]
+};
+
+const $ = (id) => document.getElementById(id);
+const fields = ["ad", "sektor", "yetkili", "adres", "tel", "saat", "insta", "one", "kampanya"];
+
+function renderShots() {
+  const prev = new Set([...document.querySelectorAll("#shots input:checked")].map(i => i.value));
+  const list = [...SHOTS.ortak.slice(0, 2), ...(SHOTS[$("sektor").value] || SHOTS.diger), ...SHOTS.ortak.slice(2)];
+  $("shots").innerHTML = "";
+  list.forEach(([k, t, s]) => {
+    const li = document.createElement("li");
+    li.innerHTML = `<label class="check" for="s_${k}"><input type="checkbox" id="s_${k}"><span><b></b><small></small></span></label>`;
+    li.querySelector("input").value = t;
+    li.querySelector("b").textContent = t;
+    li.querySelector("small").textContent = s;
+    if (prev.has(t)) li.querySelector("input").checked = true;
+    $("shots").appendChild(li);
+  });
+}
+
+const val = (id) => ($(id).value || "").trim();
+
+function buildMessage() {
+  const paket = (document.querySelector('#paket input:checked') || {}).value || "";
+  const hedef = [...document.querySelectorAll("#hedef input:checked")].map(i => i.value);
+  const ton = (document.querySelector("#ton input:checked") || {}).value || "";
+  const shots = [...document.querySelectorAll("#shots input:checked")].map(i => i.value);
+  const L = ["🎬 DÜKKAN TV – VİDEO BİLGİ FORMU", "", "📦 Paket: " + paket, "",
+    "🏪 Dükkân: " + (val("ad") || "—"),
+    "🔖 Sektör: " + $("sektor").selectedOptions[0].textContent];
+  if (val("yetkili")) L.push("🙋 Yetkili: " + val("yetkili"));
+  L.push("📍 Adres: " + (val("adres") || "—"), "📞 Telefon: " + (val("tel") || "—"));
+  if (val("saat")) L.push("🕘 Saatler: " + val("saat"));
+  if (val("insta")) L.push("📷 Instagram: " + val("insta"));
+  L.push("", "⭐ Öne çıkan: " + (val("one") || "—"));
+  if (val("kampanya")) L.push("🎁 Kampanya: " + val("kampanya"));
+  if (hedef.length) L.push("👥 Müşteriler: " + hedef.join(", "));
+  if (ton) L.push("🎭 Hava: " + ton);
+  L.push("", "📸 Gönderilecek görüntüler: " + (shots.length ? shots.join(", ") : "henüz seçilmedi"));
+  L.push("✅ İzinler: " + ($("izin").checked ? "Var" : "Belirtilmedi"));
+  L.push("✅ Bilgiler doğru: " + ($("dogru").checked ? "Evet" : "Belirtilmedi"));
+  return L.join("\n");
+}
+
+function snapshot() {
+  const s = {};
+  fields.forEach(f => s[f] = $(f).value);
+  s.paket = (document.querySelector('#paket input:checked') || {}).value;
+  s.hedef = [...document.querySelectorAll("#hedef input:checked")].map(i => i.value);
+  s.ton = (document.querySelector("#ton input:checked") || {}).value;
+  s.shots = [...document.querySelectorAll("#shots input:checked")].map(i => i.value);
+  s.izin = $("izin").checked; s.dogru = $("dogru").checked;
+  return s;
+}
+
+function update() {
+  const msg = buildMessage();
+  $("preview").textContent = msg;
+  $("wa").href = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
+  try { localStorage.setItem("dtv_form2", JSON.stringify(snapshot())); } catch (e) {}
+}
+
+function restore() {
+  let s = null;
+  try { s = JSON.parse(localStorage.getItem("dtv_form2") || "null"); } catch (e) {}
+  if (!s) return;
+  fields.forEach(f => { if (s[f] != null) $(f).value = s[f]; });
+  renderShots();
+  document.querySelectorAll("#paket input").forEach(i => { if (s.paket) i.checked = i.value === s.paket; });
+  document.querySelectorAll("#hedef input").forEach(i => i.checked = (s.hedef || []).includes(i.value));
+  document.querySelectorAll("#ton input").forEach(i => { if (s.ton) i.checked = i.value === s.ton; });
+  document.querySelectorAll("#shots input").forEach(i => i.checked = (s.shots || []).includes(i.value));
+  $("izin").checked = !!s.izin; $("dogru").checked = !!s.dogru;
+}
+
+function validate() {
+  const req = [["ad", "Dükkân adı"], ["adres", "Adres"], ["tel", "Telefon"], ["one", "Öne çıkarmak istediğiniz şey"]];
+  const missing = req.filter(([id]) => { const bad = !val(id); $(id).classList.toggle("bad", bad); return bad; });
+  if (missing.length) {
+    $("err").textContent = "Eksik alan: " + missing.map(m => m[1]).join(", ") + ". Doldurduktan sonra tekrar gönderin.";
+    $("err").hidden = false;
+    $(missing[0][0]).focus();
+    return false;
+  }
+  $("err").hidden = true;
+  return true;
+}
+
+// Siteden "?paket=premium" ile gelindiyse Premium tek bölümü seç
+if (new URLSearchParams(location.search).get("paket") === "premium") {
+  document.querySelector('#paket input[value^="Premium · Tek"]').checked = true;
+}
+
+$("sektor").addEventListener("change", () => { renderShots(); update(); });
+document.addEventListener("input", update);
+document.addEventListener("change", update);
+$("form").addEventListener("submit", e => e.preventDefault());
+$("wa").addEventListener("click", e => {
+  if (!validate()) { e.preventDefault(); return; }
+  update();
+  $("toast").textContent = "WhatsApp açılıyor. Mesajı gönderdikten sonra fotoğrafları aynı sohbete ekleyin.";
+});
+$("copy").addEventListener("click", () => {
+  if (!validate()) return;
+  const msg = buildMessage();
+  const done = () => { $("toast").textContent = "Kopyalandı. WhatsApp'ta 0535 654 18 41'e yapıştırıp gönderin."; };
+  const fallback = () => {
+    const r = document.createRange(); r.selectNodeContents($("preview"));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+    $("toast").textContent = "Metin seçildi. Uzun basıp “Kopyala”yı seçin.";
+  };
+  try { navigator.clipboard.writeText(msg).then(done, fallback); } catch (e) { fallback(); }
+});
+
+renderShots();
+restore();
+update();
+</script>
+</body>
+</html>
