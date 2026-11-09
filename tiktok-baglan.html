@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TikTok bağlantısı · Dükkan TV</title>
+<style>
+  body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;max-width:560px;margin:0 auto;padding:32px 20px;line-height:1.6;color:#222;text-align:center}
+  img{width:110px;height:110px;border-radius:22px}
+  h1{color:#c62828;margin:12px 0 4px}
+  .adim{text-align:left;background:#fff7e0;border-radius:12px;padding:14px 18px;margin:18px 0}
+  .btn{display:inline-block;background:#000;color:#fff;text-decoration:none;border-radius:10px;padding:16px 28px;font-size:18px;font-weight:700;margin-top:8px}
+  .kucuk{color:#666;font-size:14px}
+  a{color:#c62828}
+</style>
+</head>
+<body>
+<img src="logo.png" alt="Dükkan TV">
+<h1>Dükkan TV · TikTok</h1>
+<p>Dükkan TV'nin hazırladığı esnaf reklam videoları, hesap sahibinin onayıyla <b>TikTok hesabına taslak olarak</b> gönderilir. Hesap sahibi videoyu TikTok uygulamasında kontrol edip kendisi paylaşır.</p>
+
+<div class="adim">
+  <b>Nasıl çalışır?</b>
+  <ol>
+    <li>Aşağıdaki düğmeye basıp TikTok hesabınızla giriş yapın ve izin verin.</li>
+    <li>Yeni video hazır olduğunda TikTok uygulamanıza bildirim gelir.</li>
+    <li>Bildirime dokunun, videoyu düzenleyin ve <b>Paylaş</b>'a basın.</li>
+  </ol>
+</div>
+
+<a class="btn" id="baglan" href="#">TikTok ile bağlan</a>
+<p class="kucuk">İstenen izinler: temel profil bilgisi ve video yükleme (taslak). Hiçbir şey sizin onayınız olmadan paylaşılmaz.<br>
+<a href="gizlilik.html">Gizlilik Politikası</a> · <a href="kullanim-kosullari.html">Kullanım Koşulları</a></p>
+
+<script>
+  // Sandbox (deneme) ve onaylı (production) uygulama anahtarları. ?ortam=sandbox ile deneme anahtarı kullanılır.
+  var ANAHTAR = { sandbox: "sbawp3xfpd96q0dr7u", production: "" };
+  var ortam = new URLSearchParams(location.search).get("ortam") === "sandbox" || !ANAHTAR.production ? "sandbox" : "production";
+  document.getElementById("baglan").href = "https://www.tiktok.com/v2/auth/authorize/?" + new URLSearchParams({
+    client_key: ANAHTAR[ortam], scope: "user.info.basic,video.upload", response_type: "code",
+    redirect_uri: "https://dukkantv.github.io/tiktok.html", state: "dukkantv"
+  }).toString();
+</script>
+</body>
+</html>
