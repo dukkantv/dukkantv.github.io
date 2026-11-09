@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>TikTok bağlantısı · Dükkan TV</title>
+<style>
+  body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;max-width:560px;margin:0 auto;padding:32px 20px;line-height:1.6;color:#222;text-align:center}
+  h1{color:#c62828}
+  #kod{width:100%;box-sizing:border-box;font-family:monospace;font-size:14px;padding:12px;border:2px solid #c62828;border-radius:8px;word-break:break-all}
+  button{margin-top:12px;background:#c62828;color:#fff;border:0;border-radius:8px;padding:14px 28px;font-size:18px;cursor:pointer}
+  .hata{color:#c62828;font-weight:bold}
+</style>
+</head>
+<body>
+<h1>TikTok bağlantısı</h1>
+<div id="icerik">Yükleniyor…</div>
+<script>
+  var q = new URLSearchParams(location.search);
+  var kod = q.get("code"), hata = q.get("error");
+  var el = document.getElementById("icerik");
+  if (kod) {
+    el.innerHTML = '<p>İzin verildi ✅ Aşağıdaki kodu kopyala, GitHub\'da <b>TikTok İzin</b> çalışmasına yapıştır.</p>' +
+      '<textarea id="kod" rows="4" readonly></textarea><br><button id="kopya">Kodu kopyala</button>' +
+      '<p style="color:#666;font-size:14px">Kod birkaç dakika geçerlidir.</p>';
+    document.getElementById("kod").value = kod;
+    document.getElementById("kopya").onclick = function () {
+      var t = document.getElementById("kod"); t.select();
+      try { navigator.clipboard.writeText(kod); } catch (e) { document.execCommand("copy"); }
+      this.textContent = "Kopyalandı ✓";
+    };
+  } else if (hata) {
+    el.innerHTML = '<p class="hata">İzin verilmedi: ' + hata.replace(/[<>]/g, "") + '</p>';
+  } else {
+    el.innerHTML = '<p>Bu sayfa Dükkan TV\'nin TikTok bağlantısı içindir.</p><p><a href="/">Ana sayfa</a></p>';
+  }
+</script>
+</body>
+</html>
