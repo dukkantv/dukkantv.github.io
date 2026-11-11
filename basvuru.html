@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" href="logo.png">
 <title>Bilgi Formu · Dükkan TV</title>
-<meta name="description" content="Dükkan TV reklam videosu bilgi formu: 3 dakikada doldurun, WhatsApp'tan gönderin.">
+<meta name="description" content="Dükkan TV reklam videosu bilgi formu: 3 dakikada doldurun, fotoğraflarınızı ekleyin, tek dokunuşla gönderin.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
@@ -87,6 +87,41 @@ input.bad, textarea.bad { border-color: var(--red); }
 .btn.copy { background: var(--chip); color: var(--ink); }
 .btn:focus-visible { outline: 3px solid var(--mustard); outline-offset: 2px; }
 .toast { font-size: 14px; color: var(--ok); font-weight: 600; min-height: 1.2em; margin: 8px 0 0; }
+.saatler { width: 100%; border-collapse: collapse; font-size: 15px; table-layout: fixed; }
+.saatler td { padding: 5px 4px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.saatler td:first-child { font-weight: 600; width: 30%; white-space: nowrap; }
+.saatler td { overflow: hidden; }
+.saatler label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.saatler input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--red); }
+.saatler input[type=time] { font: inherit; font-size: 16px; color: var(--ink); background: var(--bg); border: 1.5px solid var(--line); border-radius: 8px; padding: 6px 4px; width: 100%; min-width: 0; max-width: 100%; }
+.saatler td.ara { text-align: center; color: var(--muted); width: 16px; padding: 0; }
+.saatler tr.kapali input[type=time] { opacity: .35; }
+.saatler input[type=time]::-webkit-calendar-picker-indicator { display: none; }
+.saatler input[type=time] { text-align: center; font-variant-numeric: tabular-nums; }
+.saatler .kapali-yazi { color: var(--muted); font-size: 14px; }
+.shot { background: var(--bg); border: 1px solid var(--line); border-radius: 12px; padding: 12px; }
+.shot b { display: block; }
+.shot small { color: var(--muted); font-size: 14px; display: block; }
+.shot .tus { display: flex; gap: 8px; margin-top: 10px; }
+.shot .tus label { flex: 1; text-align: center; font-weight: 700; font-size: 15px; border-radius: 10px; padding: 10px 8px; cursor: pointer; background: var(--chip); border: 1.5px solid var(--line); }
+.shot .tus label:first-child { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.shot .tus input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.shot .tus label:focus-within { outline: 3px solid var(--mustard); outline-offset: 1px; }
+.thumbs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.thumbs:empty { display: none; }
+.thumb { position: relative; width: 74px; height: 74px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.thumb button { position: absolute; top: 3px; right: 3px; width: 26px; height: 26px; border-radius: 50%; border: 0; background: rgba(0,0,0,.65); color: #fff; font-size: 16px; line-height: 26px; padding: 0; cursor: pointer; }
+.shot .say { color: var(--ok); font-weight: 700; font-size: 14px; }
+.btn.send { flex: 1; background: var(--red); color: var(--red-ink); }
+.btn.send[disabled] { opacity: .6; cursor: wait; }
+.btn.wa.small { flex: none; padding: 13px 14px; }
+.tamam { background: var(--paper); border: 2px solid var(--ok); border-radius: 14px; padding: 22px 18px; margin-top: 18px; text-align: center; }
+.tamam h2 { color: var(--ok); margin-bottom: 8px; }
+.tamam .no { font-family: var(--display); font-weight: 800; font-size: 15px; background: var(--chip); border-radius: 999px; padding: 4px 12px; display: inline-block; margin: 6px 0 14px; }
+.tamam .btn { width: 100%; margin-top: 8px; }
+.ilerleme { height: 6px; background: var(--line); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+.ilerleme i { display: block; height: 100%; width: 0; background: var(--ok); transition: width .2s; }
 footer { margin-top: 26px; color: var(--muted); font-size: 14px; text-align: center; }
 footer a { font-weight: 700; color: var(--ink); }
 </style>
@@ -98,11 +133,12 @@ footer a { font-weight: 700; color: var(--ink); }
   <header>
     <a class="brand" href="index.html"><img src="logo.png" alt="">Dükkan <span class="tv">TV</span></a>
     <h1>Reklam videonuz için bilgi formu</h1>
-    <p class="lead">Dükkânınıza özel videoyu hazırlayabilmemiz için birkaç bilgiye ihtiyacımız var. Doldurduktan sonra tek dokunuşla WhatsApp'tan gönderiyorsunuz.</p>
-    <div class="meta"><span>⏱ 3 dakika</span><span>📱 Telefondan doldurulur</span><span>📸 Fotoğraflar WhatsApp'tan</span></div>
+    <p class="lead">Dükkânınıza özel videoyu hazırlayabilmemiz için birkaç bilgiye ihtiyacımız var. Fotoğraflarınızı da buradan ekleyip tek dokunuşla gönderiyorsunuz.</p>
+    <div class="meta"><span>⏱ 3 dakika</span><span>📱 Telefondan doldurulur</span><span>📸 Fotoğraflar formdan</span></div>
   </header>
 
   <form id="form" novalidate>
+    <input type="text" id="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
     <section class="step" aria-labelledby="h0s">
       <div class="step-head"><div class="num">1</div><h2 id="h0s">Paket seçin</h2></div>
       <div class="pks" id="paket">
@@ -139,8 +175,11 @@ footer a { font-weight: 700; color: var(--ink); }
           <input type="text" id="adres" placeholder="Örn. Yıldırım, Millet Mah. Şüheda Cd." required></label>
         <label class="f" for="tel"><span>Telefon / WhatsApp <span class="req">*</span></span>
           <input type="tel" id="tel" placeholder="05xx xxx xx xx" autocomplete="tel" required></label>
-        <label class="f" for="saat"><span>Çalışma saatleri</span>
-          <input type="text" id="saat" placeholder="Örn. Pzt–Cmt 09:00–21:00"></label>
+        <div>
+          <div class="group-label">Çalışma saatleri <span class="hint">(kapalı olduğunuz günün işaretini kaldırın)</span></div>
+          <table class="saatler" id="saatler"><tbody></tbody></table>
+          <input type="hidden" id="saat">
+        </div>
         <label class="f" for="insta"><span>Instagram hesabınız <span class="hint">(varsa)</span></span>
           <input type="text" id="insta" placeholder="@kullaniciadi"></label>
       </div>
@@ -186,7 +225,7 @@ footer a { font-weight: 700; color: var(--ink); }
 
     <section class="step" aria-labelledby="h3s">
       <div class="step-head"><div class="num">4</div><h2 id="h3s">Gönderebileceğiniz görüntüler</h2></div>
-      <p class="hint" style="margin:0 0 12px">İşaretledikleriniz mesaja eklenir. Görüntüleri aynı WhatsApp sohbetine ayrıca yollayın.</p>
+      <p class="hint" style="margin:0 0 12px">Her madde için <b>📷 Çek</b> ile hemen fotoğraf çekin ya da <b>🖼️ Galeriden</b> seçin. Ne kadar çok ve net fotoğraf, o kadar iyi video.</p>
       <ul class="shots" id="shots"></ul>
       <div class="rules">
         <strong>İyi fotoğraf için 4 kural</strong>
@@ -207,7 +246,7 @@ footer a { font-weight: 700; color: var(--ink); }
         <label class="check" for="dogru"><input type="checkbox" id="dogru">
           <span><b>Bilgiler doğru, videoda kullanılabilir</b><small>Adres, telefon ve kampanya bilgisi videoda yazılacak. Video Dükkan TV hesaplarında da yayınlanır.</small></span></label>
         <div>
-          <div class="group-label">Gönderilecek mesaj</div>
+          <div class="group-label">Başvuru özeti</div>
           <pre class="preview" id="preview"></pre>
         </div>
       </div>
@@ -215,25 +254,33 @@ footer a { font-weight: 700; color: var(--ink); }
     </section>
   </form>
 
+  <section class="tamam" id="tamam" hidden aria-live="polite">
+    <h2>✅ Başvurunuz bize ulaştı!</h2>
+    <p style="margin:0">Teşekkürler. Bilgilerinizi ve fotoğraflarınızı aldık, videonuzun hazırlığına başlıyoruz.</p>
+    <div class="no" id="tamam-no"></div>
+    <p class="hint" style="margin:0 0 6px">Ödeme bilgisi ve süreç için WhatsApp'tan size yazacağız. Hemen yazmak isterseniz:</p>
+    <a class="btn wa" id="tamam-wa" target="_blank" rel="noopener" href="https://wa.me/905016781841">WhatsApp'tan haber ver</a>
+  </section>
+
   <footer>Sorunuz mu var? <a href="tel:+905016781841">0501 678 18 41</a> · dukkan.tvstudio@gmail.com<br>Dükkan TV · Bursa</footer>
 </div>
 
 <div class="sendbar">
   <div class="in">
-    <a class="btn wa" id="wa" data-goatcounter-click="form-whatsapp-gonder" data-goatcounter-title="Form WhatsApp ile gönderildi" href="https://wa.me/905016781841" target="_blank" rel="noopener">WhatsApp'ta gönder</a>
-    <button class="btn copy" id="copy" type="button" data-goatcounter-click="form-kopyala" data-goatcounter-title="Form metni kopyalandı">Kopyala</button>
+    <button class="btn send" id="gonder" type="button" data-goatcounter-click="form-gonder" data-goatcounter-title="Form siteden gönderildi">Başvuruyu gönder</button>
+    <a class="btn wa small" id="wa" data-goatcounter-click="form-whatsapp-gonder" data-goatcounter-title="Form WhatsApp ile gönderildi" href="https://wa.me/905016781841" target="_blank" rel="noopener" aria-label="WhatsApp ile gönder">WhatsApp</a>
   </div>
   <div class="in"><p class="toast" id="toast" role="status"></p></div>
 </div>
 
 <script>
 const WA_NUMBER = "905016781841";
-
+const API = "https://dukkantv-onay.dukkan-tvstudio.workers.dev/basvuru";
 const SHOTS = {
   ortak: [
     ["on", "Dükkânın önü", "Tabela görünecek şekilde 2–3 fotoğraf"],
     ["ic", "İçerisi", "Temiz ve düzenli hâliyle 3–4 fotoğraf"],
-    ["logo", "Logonuz", "Varsa"],
+    ["logo", "Logonuz", "Varsa (kartvizit ya da tabela fotoğrafı da olur)"],
     ["sahip", "Sizin bir fotoğrafınız", "Yüzünüz net görünsün; çizgi film hâliniz ya da gerçek fotoğrafınız için (görünmek istemiyorsanız gerekmez)"]
   ],
   kuafor: [["is", "İş başında", "Saç kesimi, sakal tıraşı, öncesi–sonrası"]],
@@ -244,125 +291,247 @@ const SHOTS = {
   toptan: [["is", "Depo ve ürünler", "Raflar, koliler, en çok satan ürünler"]],
   diger: [["is", "İş başında / ürünler", "Ne yaptığınızı gösteren fotoğraflar"]]
 };
-
+const GUNLER = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi", "Pazar"];
+const KISA = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"];
+const AZAMI_FOTO = 16;
+const FOTOLAR = {};   // kategori -> [{veri (dataURL), baslik}]
 const $ = (id) => document.getElementById(id);
-const fields = ["ad", "sektor", "yetkili", "adres", "tel", "saat", "insta", "one", "kampanya"];
+const fields = ["ad", "sektor", "yetkili", "adres", "tel", "insta", "one", "kampanya"];
+const val = (id) => ($(id).value || "").trim();
 
+/* ---------- Çalışma saatleri tablosu ---------- */
+function renderSaatler(kayit) {
+  const tb = $("saatler").tBodies[0];
+  tb.innerHTML = "";
+  GUNLER.forEach((g, i) => {
+    const k = (kayit && kayit[i]) || { acik: i < 6, bas: "09:00", bit: "21:00" };
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td><label><input type="checkbox" aria-label="${g} açık"> <span></span></label></td>
+      <td><input type="time" step="900" aria-label="${g} açılış"></td><td class="ara">–</td>
+      <td><input type="time" step="900" aria-label="${g} kapanış"></td>`;
+    tr.querySelector("span").textContent = window.innerWidth < 420 ? KISA[i] : g;
+    const [cb, t1, t2] = tr.querySelectorAll("input");
+    cb.checked = k.acik; t1.value = k.bas; t2.value = k.bit;
+    const guncel = () => { tr.classList.toggle("kapali", !cb.checked); t1.disabled = t2.disabled = !cb.checked; };
+    cb.addEventListener("change", guncel); guncel();
+    tb.appendChild(tr);
+  });
+}
+function saatVerisi() {
+  return [...$("saatler").tBodies[0].rows].map(tr => {
+    const [cb, t1, t2] = tr.querySelectorAll("input");
+    return { acik: cb.checked, bas: t1.value, bit: t2.value };
+  });
+}
+function saatYazi() {
+  // Aynı saatte açık olan ardışık günleri birleştir: "Pzt–Cmt 09:00–21:00, Paz kapalı"
+  const v = saatVerisi(), parca = [];
+  let i = 0;
+  while (i < 7) {
+    let j = i;
+    const ayni = (a, b) => a.acik === b.acik && (!a.acik || (a.bas === b.bas && a.bit === b.bit));
+    while (j + 1 < 7 && ayni(v[j + 1], v[i])) j++;
+    const ad = i === j ? KISA[i] : KISA[i] + "–" + KISA[j];
+    parca.push(v[i].acik ? `${ad} ${v[i].bas || "?"}–${v[i].bit || "?"}` : `${ad} kapalı`);
+    i = j + 1;
+  }
+  return parca.join(", ");
+}
+
+/* ---------- Fotoğraflar ---------- */
+function toplamFoto() { return Object.values(FOTOLAR).reduce((a, l) => a + l.length, 0); }
+function sikistir(dosya) {
+  return new Promise((ok, hata) => {
+    const url = URL.createObjectURL(dosya);
+    const img = new Image();
+    img.onload = () => {
+      const m = 1600, o = Math.min(1, m / Math.max(img.naturalWidth, img.naturalHeight));
+      const c = document.createElement("canvas");
+      c.width = Math.round(img.naturalWidth * o); c.height = Math.round(img.naturalHeight * o);
+      c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+      URL.revokeObjectURL(url);
+      ok(c.toDataURL("image/jpeg", 0.82));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); hata(new Error("Fotoğraf açılamadı")); };
+    img.src = url;
+  });
+}
+async function fotoEkle(kat, baslik, dosyalar, li) {
+  for (const d of dosyalar) {
+    if (!d.type.startsWith("image/")) continue;
+    if (toplamFoto() >= AZAMI_FOTO) { $("toast").textContent = `En fazla ${AZAMI_FOTO} fotoğraf ekleyebilirsiniz.`; break; }
+    try {
+      const veri = await sikistir(d);
+      (FOTOLAR[kat] = FOTOLAR[kat] || []).push({ veri, baslik });
+    } catch (e) { $("toast").textContent = "Bir fotoğraf açılamadı, başka bir fotoğraf deneyin."; }
+  }
+  thumbs(kat, li); update();
+}
+function thumbs(kat, li) {
+  const kutu = li.querySelector(".thumbs");
+  kutu.innerHTML = "";
+  (FOTOLAR[kat] || []).forEach((f, i) => {
+    const d = document.createElement("div"); d.className = "thumb";
+    d.innerHTML = `<img alt=""><button type="button" aria-label="Fotoğrafı kaldır">×</button>`;
+    d.querySelector("img").src = f.veri;
+    d.querySelector("button").onclick = () => { FOTOLAR[kat].splice(i, 1); thumbs(kat, li); update(); };
+    kutu.appendChild(d);
+  });
+  const n = (FOTOLAR[kat] || []).length;
+  li.querySelector(".say").textContent = n ? `✓ ${n} fotoğraf eklendi` : "";
+}
 function renderShots() {
-  const prev = new Set([...document.querySelectorAll("#shots input:checked")].map(i => i.value));
   const list = [...SHOTS.ortak.slice(0, 2), ...(SHOTS[$("sektor").value] || SHOTS.diger), ...SHOTS.ortak.slice(2)];
   $("shots").innerHTML = "";
   list.forEach(([k, t, s]) => {
-    const li = document.createElement("li");
-    li.innerHTML = `<label class="check" for="s_${k}"><input type="checkbox" id="s_${k}"><span><b></b><small></small></span></label>`;
-    li.querySelector("input").value = t;
+    const li = document.createElement("li"); li.className = "shot";
+    li.innerHTML = `<b></b><small></small><span class="say"></span>
+      <div class="tus">
+        <label>📷 Çek<input type="file" accept="image/*" capture="environment"></label>
+        <label>🖼️ Galeriden<input type="file" accept="image/*" multiple></label>
+      </div><div class="thumbs"></div>`;
     li.querySelector("b").textContent = t;
     li.querySelector("small").textContent = s;
-    if (prev.has(t)) li.querySelector("input").checked = true;
+    li.querySelectorAll("input[type=file]").forEach(inp => inp.addEventListener("change", e => {
+      fotoEkle(k, t, [...e.target.files], li); e.target.value = "";
+    }));
     $("shots").appendChild(li);
+    thumbs(k, li);
   });
 }
 
-const val = (id) => ($(id).value || "").trim();
-
+/* ---------- Mesaj / özet ---------- */
+function secili(sel) { return (document.querySelector(sel) || {}).value || ""; }
 function buildMessage() {
-  const paket = (document.querySelector('#paket input:checked') || {}).value || "";
   const hedef = [...document.querySelectorAll("#hedef input:checked")].map(i => i.value);
-  const ton = (document.querySelector("#ton input:checked") || {}).value || "";
-  const gorunum = (document.querySelector("#gorunum input:checked") || {}).value || "";
-  const shots = [...document.querySelectorAll("#shots input:checked")].map(i => i.value);
-  const L = ["🎬 DÜKKAN TV – VİDEO BİLGİ FORMU", "", "📦 Paket: " + paket, "",
+  const fotoOzet = Object.entries(FOTOLAR).filter(([, l]) => l.length).map(([, l]) => `${l[0].baslik} (${l.length})`);
+  const L = ["🎬 DÜKKAN TV – VİDEO BİLGİ FORMU", "", "📦 Paket: " + secili('#paket input:checked'), "",
     "🏪 Dükkân: " + (val("ad") || "—"),
     "🔖 Sektör: " + $("sektor").selectedOptions[0].textContent];
   if (val("yetkili")) L.push("🙋 Yetkili: " + val("yetkili"));
   L.push("📍 Adres: " + (val("adres") || "—"), "📞 Telefon: " + (val("tel") || "—"));
-  if (val("saat")) L.push("🕘 Saatler: " + val("saat"));
+  L.push("🕘 Saatler: " + saatYazi());
   if (val("insta")) L.push("📷 Instagram: " + val("insta"));
   L.push("", "⭐ Öne çıkan: " + (val("one") || "—"));
   if (val("kampanya")) L.push("🎁 Kampanya: " + val("kampanya"));
   if (hedef.length) L.push("👥 Müşteriler: " + hedef.join(", "));
-  if (ton) L.push("🎭 Hava: " + ton);
-  if (gorunum) L.push("🧑 Videoda görünüm: " + gorunum);
-  L.push("", "📸 Gönderilecek görüntüler: " + (shots.length ? shots.join(", ") : "henüz seçilmedi"));
+  L.push("🎭 Hava: " + secili("#ton input:checked"));
+  L.push("🧑 Videoda görünüm: " + secili("#gorunum input:checked"));
+  L.push("", "📸 Fotoğraflar: " + (fotoOzet.length ? fotoOzet.join(", ") : "henüz eklenmedi"));
   L.push("✅ İzinler: " + ($("izin").checked ? "Var" : "Belirtilmedi"));
   L.push("✅ Bilgiler doğru: " + ($("dogru").checked ? "Evet" : "Belirtilmedi"));
   return L.join("\n");
 }
-
+function formVerisi() {
+  return {
+    paket: secili('#paket input:checked'), ad: val("ad"), sektor: $("sektor").selectedOptions[0].textContent,
+    yetkili: val("yetkili"), adres: val("adres"), tel: val("tel"), saat: saatYazi(), saat_tablo: saatVerisi(),
+    insta: val("insta"), one: val("one"), kampanya: val("kampanya"),
+    hedef: [...document.querySelectorAll("#hedef input:checked")].map(i => i.value).join(", "),
+    ton: secili("#ton input:checked"), gorunum: secili("#gorunum input:checked"),
+    izin: $("izin").checked ? "Var" : "Yok", dogru: $("dogru").checked ? "Evet" : "Hayır"
+  };
+}
 function snapshot() {
   const s = {};
   fields.forEach(f => s[f] = $(f).value);
-  s.paket = (document.querySelector('#paket input:checked') || {}).value;
+  s.saatler = saatVerisi();
+  s.paket = secili('#paket input:checked');
   s.hedef = [...document.querySelectorAll("#hedef input:checked")].map(i => i.value);
-  s.ton = (document.querySelector("#ton input:checked") || {}).value;
-  s.gorunum = (document.querySelector("#gorunum input:checked") || {}).value;
-  s.shots = [...document.querySelectorAll("#shots input:checked")].map(i => i.value);
+  s.ton = secili("#ton input:checked"); s.gorunum = secili("#gorunum input:checked");
   s.izin = $("izin").checked; s.dogru = $("dogru").checked;
   return s;
 }
-
 function update() {
+  $("saat").value = saatYazi();
   const msg = buildMessage();
   $("preview").textContent = msg;
   $("wa").href = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg);
-  try { localStorage.setItem("dtv_form2", JSON.stringify(snapshot())); } catch (e) {}
+  try { localStorage.setItem("dtv_form3", JSON.stringify(snapshot())); } catch (e) {}
 }
-
 function restore() {
   let s = null;
-  try { s = JSON.parse(localStorage.getItem("dtv_form2") || "null"); } catch (e) {}
-  if (!s) return;
+  try { s = JSON.parse(localStorage.getItem("dtv_form3") || "null"); } catch (e) {}
+  if (!s) { renderSaatler(); return; }
   fields.forEach(f => { if (s[f] != null) $(f).value = s[f]; });
-  renderShots();
+  renderSaatler(s.saatler);
   document.querySelectorAll("#paket input").forEach(i => { if (s.paket) i.checked = i.value === s.paket; });
   document.querySelectorAll("#hedef input").forEach(i => i.checked = (s.hedef || []).includes(i.value));
   document.querySelectorAll("#ton input").forEach(i => { if (s.ton) i.checked = i.value === s.ton; });
   document.querySelectorAll("#gorunum input").forEach(i => { if (s.gorunum) i.checked = i.value === s.gorunum; });
-  document.querySelectorAll("#shots input").forEach(i => i.checked = (s.shots || []).includes(i.value));
   $("izin").checked = !!s.izin; $("dogru").checked = !!s.dogru;
 }
-
-function validate() {
+function hataGoster(m, odak) {
+  $("err").textContent = m; $("err").hidden = false;
+  if (odak) odak.focus(); else $("err").scrollIntoView({ behavior: "smooth", block: "center" });
+}
+function validate(tam) {
   const req = [["ad", "Dükkân adı"], ["adres", "Adres"], ["tel", "Telefon"], ["one", "Öne çıkarmak istediğiniz şey"]];
   const missing = req.filter(([id]) => { const bad = !val(id); $(id).classList.toggle("bad", bad); return bad; });
   if (missing.length) {
-    $("err").textContent = "Eksik alan: " + missing.map(m => m[1]).join(", ") + ". Doldurduktan sonra tekrar gönderin.";
-    $("err").hidden = false;
-    $(missing[0][0]).focus();
+    hataGoster("Eksik alan: " + missing.map(m => m[1]).join(", ") + ". Doldurduktan sonra tekrar gönderin.", $(missing[0][0]));
+    return false;
+  }
+  if (tam && (!$("izin").checked || !$("dogru").checked)) {
+    hataGoster("Göndermeden önce 5. bölümdeki iki onay kutusunu işaretleyin.");
     return false;
   }
   $("err").hidden = true;
   return true;
 }
 
+/* ---------- Gönderim ---------- */
+async function gonder() {
+  if (!validate(true)) return;
+  if (!toplamFoto() && !confirm("Hiç fotoğraf eklemediniz. Fotoğrafsız video daha zayıf olur. Yine de gönderilsin mi?")) return;
+  const btn = $("gonder");
+  btn.disabled = true; btn.textContent = "Gönderiliyor…";
+  $("toast").innerHTML = 'Fotoğraflar yükleniyor, lütfen bekleyin.<div class="ilerleme"><i id="bar"></i></div>';
+  const fotolar = [];
+  Object.entries(FOTOLAR).forEach(([kategori, l]) => l.forEach(f => fotolar.push({ kategori, baslik: f.baslik, veri: f.veri })));
+  const govde = JSON.stringify({ form: formVerisi(), fotolar, hp: ($("hp") || {}).value || "" });
+  try {
+    const sonuc = await new Promise((ok, hata) => {
+      const x = new XMLHttpRequest();
+      x.open("POST", API);
+      x.setRequestHeader("Content-Type", "application/json");
+      x.upload.onprogress = e => { if (e.lengthComputable && $("bar")) $("bar").style.width = Math.round(e.loaded / e.total * 100) + "%"; };
+      x.onload = () => { let j = {}; try { j = JSON.parse(x.responseText); } catch (e) {} x.status === 200 && j.ok ? ok(j) : hata(new Error(j.hata || "Sunucu hatası")); };
+      x.onerror = () => hata(new Error("Bağlantı kurulamadı"));
+      x.timeout = 180000; x.ontimeout = () => hata(new Error("Süre doldu"));
+      x.send(govde);
+    });
+    try { localStorage.removeItem("dtv_form3"); } catch (e) {}
+    $("form").hidden = true; document.querySelector(".sendbar").hidden = true;
+    $("tamam-no").textContent = "Başvuru no: " + sonuc.id;
+    $("tamam-wa").href = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(
+      `Merhaba, Dükkan TV formunu gönderdim. Dükkân: ${val("ad")} · Başvuru no: ${sonuc.id}`);
+    $("tamam").hidden = false;
+    $("tamam").scrollIntoView({ behavior: "smooth" });
+    if (window.goatcounter && goatcounter.count) goatcounter.count({ path: "form-basarili", title: "Başvuru alındı", event: true });
+  } catch (e) {
+    btn.disabled = false; btn.textContent = "Başvuruyu gönder";
+    $("toast").textContent = "";
+    hataGoster("Gönderilemedi (" + e.message + "). İnternetinizi kontrol edip tekrar deneyin ya da sağdaki WhatsApp butonuyla gönderin; fotoğrafları sohbete ayrıca ekleyin.");
+  }
+}
+
 // Siteden "?paket=premium" ile gelindiyse Premium tek bölümü seç
 if (new URLSearchParams(location.search).get("paket") === "premium") {
   document.querySelector('#paket input[value^="Premium · Tek"]').checked = true;
 }
-
 $("sektor").addEventListener("change", () => { renderShots(); update(); });
 document.addEventListener("input", update);
 document.addEventListener("change", update);
 $("form").addEventListener("submit", e => e.preventDefault());
+$("gonder").addEventListener("click", gonder);
 $("wa").addEventListener("click", e => {
-  if (!validate()) { e.preventDefault(); return; }
+  if (!validate(false)) { e.preventDefault(); return; }
   update();
   $("toast").textContent = "WhatsApp açılıyor. Mesajı gönderdikten sonra fotoğrafları aynı sohbete ekleyin.";
 });
-$("copy").addEventListener("click", () => {
-  if (!validate()) return;
-  const msg = buildMessage();
-  const done = () => { $("toast").textContent = "Kopyalandı. WhatsApp'ta 0501 678 18 41'e yapıştırıp gönderin."; };
-  const fallback = () => {
-    const r = document.createRange(); r.selectNodeContents($("preview"));
-    const s = getSelection(); s.removeAllRanges(); s.addRange(r);
-    $("toast").textContent = "Metin seçildi. Uzun basıp “Kopyala”yı seçin.";
-  };
-  try { navigator.clipboard.writeText(msg).then(done, fallback); } catch (e) { fallback(); }
-});
-
-renderShots();
 restore();
+renderShots();
 update();
 </script>
 </body>
