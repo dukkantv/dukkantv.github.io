@@ -1,3 +1,4 @@
 # Dükkan TV
 
-Esnafa özel kısa reklam videoları — Bursa. Site: https://dukkantv.github.io
+Kısa çizgi film skeçleri (Levent & Cemo), Drama Bite hikâyeleri, Kasa Kurgu vakaları ve mobil uygulamalar.
+Site: https://dukkantv.github.io

@@ -4,43 +4,65 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" href="logo.png">
-<title>Dükkan TV</title>
-<meta name="description" content="Dükkan TV: Levent ile Cemo'nun kısa çizgi film skeçleri ve günlük hayatı kolaylaştıran mobil uygulamalar.">
+<title>Dükkan TV — kısa çizgi film skeçleri, hikâyeler ve uygulamalar</title>
+<meta name="description" content="Dükkan TV stüdyosu: Levent & Cemo çizgi film skeçleri, Drama Bite duygusal hikâyeleri, Kasa Kurgu 'Katil Kim?' vakaları ve mobil uygulamalarımız.">
 <meta property="og:title" content="Dükkan TV">
-<meta property="og:description" content="Kısa çizgi film skeçleri ve mobil uygulamalar.">
+<meta property="og:description" content="Kısa çizgi film skeçleri, duygusal hikâyeler, gizem vakaları ve mobil uygulamalar.">
 <meta property="og:image" content="https://dukkantv.github.io/logo1024.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
 :root {
   --bg: #fff8eb; --paper: #ffffff; --ink: #221e28; --muted: #6b6258; --line: #eadfca;
-  --mustard: #ffc43d; --red: #d63031; --red-ink: #ffffff; --chip: #fbefd3;
+  --mustard: #ffc43d; --red: #d63031; --chip: #fbefd3;
   --display: "Poppins", "Segoe UI", system-ui, sans-serif;
   --body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) {
   :root { --bg: #1b1814; --paper: #25211c; --ink: #f6eedf; --muted: #b5a995; --line: #3a342c;
-    --mustard: #f2b730; --red: #ef5350; --red-ink: #1b1814; --chip: #332c22; color-scheme: dark; }
+    --mustard: #f2b730; --red: #ef5350; --chip: #332c22; color-scheme: dark; }
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 18px/1.6 var(--body); }
-.awning { height: 14px; background: repeating-linear-gradient(90deg, var(--red) 0 28px, var(--mustard) 28px 56px); }
-.in { max-width: 860px; margin: 0 auto; padding: 0 20px; }
-header { padding: 40px 0 28px; text-align: center; }
-header img { width: 96px; height: 96px; border-radius: 22px; }
-h1, h2, h3 { font-family: var(--display); line-height: 1.2; margin: 0 0 10px; }
-h1 { font-size: clamp(30px, 6vw, 46px); }
-h2 { font-size: 26px; margin-top: 8px; }
-.lead { color: var(--muted); font-size: 20px; max-width: 600px; margin: 0 auto; }
-section { padding: 24px 0; }
-.cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+a { color: inherit; }
+.awning { height: 16px; background: repeating-linear-gradient(90deg, var(--red) 0 30px, #fff 30px 60px); }
+.in { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+header { padding: 44px 0 20px; text-align: center; }
+header img { width: 104px; height: 104px; border-radius: 24px; box-shadow: 0 6px 20px rgba(0,0,0,.12); }
+h1, h2, h3 { font-family: var(--display); line-height: 1.2; margin: 0 0 8px; }
+h1 { font-size: clamp(32px, 6vw, 48px); margin-top: 14px; }
+h2 { font-size: 28px; margin: 36px 0 16px; }
+.lead { color: var(--muted); font-size: 20px; max-width: 620px; margin: 0 auto; }
+
+.brands { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
+.brand { border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 10px; color: var(--c-ink); background: var(--c-bg); box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+.brand .top { display: flex; align-items: center; gap: 14px; }
+.badge { width: 64px; height: 64px; border-radius: 50%; flex: none; display: grid; place-items: center; overflow: hidden; }
+.badge img { width: 100%; height: 100%; object-fit: cover; }
+.brand h3 { font-size: 22px; margin: 0; }
+.brand .handle { font-size: 15px; opacity: .8; }
+.brand p { margin: 0; opacity: .92; }
+.brand ul { margin: 0; padding-left: 20px; opacity: .92; font-size: 16px; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 8px; }
+.links a { text-decoration: none; font-weight: 700; font-size: 15px; padding: 8px 14px; border-radius: 999px; background: var(--c-btn); color: var(--c-btn-ink); }
+.links a:hover { filter: brightness(1.08); }
+
+.dukkan { --c-bg: #ffc43d; --c-ink: #221e28; --c-btn: #221e28; --c-btn-ink: #ffc43d; }
+.dukkan .badge { background: #fff; }
+.drama { --c-bg: #15110c; --c-ink: #f3e7cf; --c-btn: #d4a845; --c-btn-ink: #15110c; }
+.drama .badge { border: 3px solid #d4a845; font: 800 24px/1 Georgia, "Times New Roman", serif; color: #d4a845; }
+.kasa { --c-bg: #121a2b; --c-ink: #eef2fa; --c-btn: #e53935; --c-btn-ink: #fff; }
+.kasa .badge { background: #1d2a44; }
+.kasa .badge span { width: 0; height: 0; border-left: 22px solid #ffc43d; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px; }
+
+.apps { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 .card { background: var(--paper); border: 1px solid var(--line); border-radius: 18px; padding: 20px; }
 .card p { margin: 6px 0 12px; color: var(--muted); }
 .chip { display: inline-block; background: var(--chip); border-radius: 999px; padding: 2px 12px; font-size: 14px; font-weight: 600; }
-.btn { display: inline-block; background: var(--red); color: var(--red-ink); font-weight: 700; text-decoration: none; border-radius: 12px; padding: 10px 16px; margin: 4px 6px 0 0; }
-a { color: var(--red); }
-.socials { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 18px; }
-footer { border-top: 1px solid var(--line); margin-top: 24px; padding: 20px 0 40px; color: var(--muted); font-size: 15px; text-align: center; }
+.card a { color: var(--red); }
+
+.contact { text-align: center; padding: 10px 0 20px; color: var(--muted); }
+footer { border-top: 1px solid var(--line); margin-top: 28px; padding: 20px 0 40px; color: var(--muted); font-size: 15px; text-align: center; }
 footer a { color: var(--muted); }
 </style>
 <script data-goatcounter="https://dukkantv.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
@@ -50,37 +72,76 @@ footer a { color: var(--muted); }
 <header class="in">
   <img src="logo.png" alt="Dükkan TV logosu">
   <h1>Dükkan TV</h1>
-  <p class="lead">Muhabir Levent ile kameraman Cemo her gün başka bir meslekte, başka bir dükkânda. Herkesin "aynen böyle oluyor" dediği kısa çizgi film skeçleri ve günlük hayatı kolaylaştıran mobil uygulamalar.</p>
-  <div class="socials">
-    <a class="btn" href="https://www.youtube.com/@dukkantvstudio" target="_blank" rel="noopener">YouTube</a>
-    <a class="btn" href="https://www.instagram.com/dukkan.tv/" target="_blank" rel="noopener">Instagram</a>
-    <a class="btn" href="https://www.tiktok.com/@dukkan.tv" target="_blank" rel="noopener">TikTok</a>
-  </div>
+  <p class="lead">Kısa çizgi film skeçleri, içe dokunan hikâyeler, her gün yeni bir gizem vakası ve günlük hayatı kolaylaştıran uygulamalar. Hepsi tek stüdyodan, her gün yeni bölüm.</p>
 </header>
 
 <main class="in">
-  <section>
-    <h2>Uygulamalarımız</h2>
-    <div class="cards">
-      <div class="card">
-        <span class="chip">Yakında Google Play'de</span>
-        <h3>Ezan Vakti, Kaza, Borç Defteri</h3>
-        <p>Diyanet ezan vakitleri, kaza namazı sayacı, zikir ve borç defteri tek uygulamada. Hesap yok, veriler telefonunda kalır.</p>
-        <a href="uygulamalar/ezan-defteri-gizlilik.html">Gizlilik politikası</a>
-      </div>
-      <div class="card">
-        <span class="chip">Yakında Google Play'de</span>
-        <h3>Dolmuş Durağı</h3>
-        <p>Durak durak ilerlediğin, internetsiz oynanan eğlenceli bir dolmuş oyunu.</p>
-        <a href="uygulamalar/dolmus-duragi-gizlilik.html">Gizlilik politikası</a>
-      </div>
-    </div>
-  </section>
+  <h2>Kanallarımız</h2>
+  <div class="brands">
 
-  <section>
-    <h2>İletişim</h2>
-    <p>İş birliği ve sorularınız için: <strong>dukkan.tvstudio@gmail.com</strong></p>
-  </section>
+    <article class="brand dukkan">
+      <div class="top">
+        <div class="badge"><img src="logo.png" alt=""></div>
+        <div><h3>Dükkan TV</h3><div class="handle">@dukkantvstudio · @dukkan.tv</div></div>
+      </div>
+      <p>Muhabir Levent ile kameraman Cemo her gün başka bir meslekte, başka bir dükkânda.</p>
+      <ul><li>Taksici, berber, manav, kebapçı…</li><li>Herkesin "aynen böyle oluyor" dediği skeçler</li><li>Her akşam yeni bölüm 🕖</li></ul>
+      <div class="links">
+        <a href="https://www.youtube.com/@dukkantvstudio" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.instagram.com/dukkan.tv/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@dukkan.tv" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.facebook.com/profile.php?id=61596082779099" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </article>
+
+    <article class="brand drama">
+      <div class="top">
+        <div class="badge">DB</div>
+        <div><h3>Drama Bite</h3><div class="handle">@dramabitetr</div></div>
+      </div>
+      <p>Kısa ama içe dokunan hikâyeler 💔</p>
+      <ul><li>Aile, sevgi, pişmanlık, dostluk, gurbet</li><li>Gerçek hayattan ilham alan kurgular</li><li>Her gün yeni bir hikâye</li></ul>
+      <div class="links">
+        <a href="https://www.youtube.com/@dramabitetr" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.instagram.com/dramabitetr/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@dramabitetr" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.facebook.com/profile.php?id=61595768823349" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </article>
+
+    <article class="brand kasa">
+      <div class="top">
+        <div class="badge"><span></span></div>
+        <div><h3>Kasa Kurgu</h3><div class="handle">@kasakurgu · @kasakurgu.tr</div></div>
+      </div>
+      <p>Her gün yeni bir kurgu 🎬</p>
+      <ul><li>🕵️ Katil Kim? Her gün 1 vaka, 3 şüpheli</li><li>💰 500 TL ile 50.000 TL hedefi</li><li>Tahminini yorumlara yaz, cevap ertesi gün!</li></ul>
+      <div class="links">
+        <a href="https://www.youtube.com/@kasakurgu" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://www.instagram.com/kasakurgu.tr/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.facebook.com/profile.php?id=61596289864747" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </article>
+
+  </div>
+
+  <h2>Uygulamalarımız</h2>
+  <div class="apps">
+    <div class="card">
+      <span class="chip">Yakında Google Play'de</span>
+      <h3>Ezan Vakti, Kaza, Borç Defteri</h3>
+      <p>Diyanet ezan vakitleri, kaza namazı sayacı, zikir ve borç defteri tek uygulamada. Hesap yok, veriler telefonunda kalır.</p>
+      <a href="uygulamalar/ezan-defteri-gizlilik.html">Gizlilik politikası</a>
+    </div>
+    <div class="card">
+      <span class="chip">Yakında Google Play'de</span>
+      <h3>Dolmuş Durağı</h3>
+      <p>Durak durak ilerlediğin, internetsiz oynanan eğlenceli bir dolmuş oyunu.</p>
+      <a href="uygulamalar/dolmus-duragi-gizlilik.html">Gizlilik politikası</a>
+    </div>
+  </div>
+
+  <p class="contact">İletişim: <strong>dukkan.tvstudio@gmail.com</strong><br>Tüm hikâyeler ve karakterler kurgusaldır.</p>
 </main>
 
 <footer>
